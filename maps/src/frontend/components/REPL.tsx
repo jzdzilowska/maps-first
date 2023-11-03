@@ -3,6 +3,7 @@ import "../styles/main.css";
 import { REPLHistory } from "./REPLHistory";
 import { REPLInput } from "./REPLInput";
 import { HistoryItem } from "../types/HistoryItem";
+import WrappedMap from "./WrappedMap";
 
 /**
  * React component allowing users to input commands;
@@ -31,22 +32,31 @@ export default function REPL() {
 
   return (
     <div className="repl">
-      <REPLHistory
-        commandHistory={history}
-        mode={mode}
-        commandResultMap={commandResultMap}
-        ariaLabel="History Log Display to show past commands inputted"
-      />
+      <div className="map-container">
+        <WrappedMap />
+      </div>
+
+      {/* Add a separator */}
       <hr></hr>
-      <REPLInput
-        history={history}
-        setHistory={setHistory}
-        mode={mode}
-        setMode={setMode}
-        commandResultMap={commandResultMap}
-        updateCommandResult={updateCommandResult}
-        ariaLabel="Input Command Component to take in and process command inputs"
-      />
+      <div className="repl-content"></div>
+      <div className="repl">
+        <REPLHistory
+          commandHistory={history}
+          mode={mode}
+          commandResultMap={commandResultMap}
+          ariaLabel="History Log Display to show past commands inputted"
+        />
+        <hr></hr>
+        <REPLInput
+          history={history}
+          setHistory={setHistory}
+          mode={mode}
+          setMode={setMode}
+          commandResultMap={commandResultMap}
+          updateCommandResult={updateCommandResult}
+          ariaLabel="Input Command Component to take in and process command inputs"
+        />
+      </div>
     </div>
   );
 }
